@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="InsuranceMapper">
+
+	<resultMap id="InsuranceMap" type="insurance.insurance">
+		<result property="insuranceID" column="insuranceID" />
+		<result property="name" column="insuranceName" />
+		<result property="subscriptionTarget" column="subscriptionTarget" />
+		<result property="insurancePeriod" column="insurancePeriod" />
+		<result property="paymentMethod" column="paymentMethod" />
+		<result property="payment" column="payIn" />
+		<result property="insuranceMoney" column="insuranceMoney" />
+		<result property="specialSubscription" column="specialSubscription" />
+		<result property="statement" column="statement" />
+
+	</resultMap>
+
+	<select id="findInsuranceStatement" parameterType="insurance.insurance" resultMap="InsuranceMap">
+       SELECT * from insurance where statement = 1;
+    </select>
+
+</mapper>

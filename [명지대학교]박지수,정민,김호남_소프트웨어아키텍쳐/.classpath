@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/JeesooPark/Downloads/JRE모음/activation.jar"/>
+	<classpathentry kind="lib" path="C:/Users/JeesooPark/Downloads/JRE모음/mail.jar"/>
+	<classpathentry kind="lib" path="C:/Users/JeesooPark/Downloads/JRE모음/mybatis-3.5.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/JeesooPark/Downloads/JRE모음/mysql-connector-java-8.0.13.jar"/>
+	<classpathentry kind="lib" path="C:/Users/JeesooPark/Downloads/JRE모음/org.springframework.beans-3.0.2.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/JeesooPark/Downloads/JRE모음/org.springframework.core-3.0.2.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/JeesooPark/Downloads/JRE모음/spring-beans-5.1.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/JeesooPark/Downloads/JRE모음/spring-context-5.1.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/JeesooPark/Downloads/JRE모음/spring-core-5.1.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/JeesooPark/Downloads/JRE모음/spring-expression-5.1.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/JeesooPark/Downloads/JRE모음/spring-instrument-5.1.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/JeesooPark/Downloads/JRE모음/spring-jcl-5.1.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/JeesooPark/Downloads/JRE모음/spring-jdbc-5.1.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/JeesooPark/Downloads/JRE모음/spring-jms-5.1.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/JeesooPark/Downloads/JRE모음/spring-messaging-5.1.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/JeesooPark/Downloads/JRE모음/spring-orm-5.1.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/JeesooPark/Downloads/JRE모음/spring-oxm-5.1.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/JeesooPark/Downloads/JRE모음/spring-test-5.1.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/JeesooPark/Downloads/JRE모음/spring-tx-5.1.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/JeesooPark/Downloads/JRE모음/spring-web-5.1.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/JeesooPark/Downloads/JRE모음/spring-webflux-5.1.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/JeesooPark/Downloads/JRE모음/spring-webmvc-5.1.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/JeesooPark/Downloads/JRE모음/spring-websocket-5.1.3.RELEASE.jar"/>
+	<classpathentry kind="src" path=""/>
+	<classpathentry kind="output" path=""/>
+</classpath>

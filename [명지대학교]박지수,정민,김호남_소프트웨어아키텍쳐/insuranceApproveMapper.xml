@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="insuranceApproveMapper">
+
+	<!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다. -->
+	<resultMap id="approveMap" type="insurance.insurance">
+		<result property="name" column="insuranceName" />
+		<result property="insuranceMoney" column="insuranceMoney" />
+		<result property="payIn" column="payIn" />
+		<result property="insurancePeriod" column="insurancePeriod" />
+		<result property="insuranceID" column="InsuranceID" />
+
+	</resultMap>
+
+	<!-- 단일행 조회를 위한 기능 정의 -->
+	<delete id="delete" parameterType="insurance.insurance">
+		delete from insurance where insuranceName = #{name} and statement = 0;
+	</delete>
+
+	<update id="Update" parameterType="insurance.insurance">
+    update insurance SET statement = 1 where insuranceName =#{name};
+     </update>
+</mapper>

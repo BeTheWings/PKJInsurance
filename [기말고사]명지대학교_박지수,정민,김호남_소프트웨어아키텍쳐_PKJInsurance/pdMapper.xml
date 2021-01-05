@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pdMapper">
+
+	<!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다. -->
+	<resultMap id="firePdMap"
+		type="model_insuranceRegistration.mFireInsuranceRegistration">
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+		<result property="date" column="date" />
+		<result property="totalPrice" column="totalPrice" />
+	</resultMap>
+
+	<resultMap id="carPdMap"
+		type="model_insuranceRegistration.mCarInsuranceRegistration">
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+		<result property="date" column="date" />
+		<result property="totalPrice" column="totalPrice" />
+	</resultMap>
+
+	<resultMap id="onTheSeaPdMap"
+		type="model_insuranceRegistration.mOnTheSeaInsuranceRegistration">
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+		<result property="date" column="date" />
+		<result property="totalPrice" column="totalPrice" />
+	</resultMap>
+
+	<resultMap id="specialPdMap"
+		type="model_insuranceRegistration.mSpecialInsuranceRegistration">
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+		<result property="date" column="date" />
+		<result property="totalPrice" column="totalPrice" />
+	</resultMap>
+
+	<resultMap id="fireRateMap" type="model_client.mRate">
+		<result property="rate" column="rate" />
+		<result property="job" column="job" />
+	</resultMap>
+
+	<select id="searchFireJob" parameterType="model_client.mRate"
+		resultMap="fireRateMap">
+		select rate from rate where job = #{job};
+	</select>
+
+	<insert id="fireInsert"
+		parameterType="model_insuranceRegistration.mFireInsuranceRegistration"
+		useGeneratedKeys="true" keyProperty="date">
+		insert into
+		fireInsuranceRegistration(date, totalPrice) values(#{date},
+		#{totalPrice});
+	</insert>
+	<insert id="carInsert"
+		parameterType="model_insuranceRegistration.mCarInsuranceRegistration"
+		useGeneratedKeys="true" keyProperty="date">
+		insert into
+		carInsuranceRegistration(date, totalPrice) values(#{date},
+		#{totalPrice});
+	</insert>
+	<insert id="onTheSeaInsert"
+		parameterType="model_insuranceRegistration.mOnTheSeaInsuranceRegistration"
+		useGeneratedKeys="true" keyProperty="date">
+		insert into
+		onTheSeaInsuranceRegistration(date, totalPrice) values(#{date},
+		#{totalPrice});
+	</insert>
+	<insert id="specialInsert"
+		parameterType="model_insuranceRegistration.mSpecialInsuranceRegistration"
+		useGeneratedKeys="true" keyProperty="date">
+		insert into
+		specialInsuranceRegistration(date, totalPrice) values(#{date},
+		#{totalPrice});
+	</insert>
+
+</mapper>
