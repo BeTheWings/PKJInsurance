@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pdMapper">
+
+	<!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다. -->
+	<resultMap id="firePdMap" type="insuranceRegistration.fireInsuranceRegistration">
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+		<result property="date" column="date" />
+		<result property="totalPrice" column="totalPrice" />
+	</resultMap>
+	
+	<resultMap id="carPdMap" type="insuranceRegistration.carInsuranceRegistration">
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+		<result property="date" column="date" />
+		<result property="totalPrice" column="totalPrice" />
+	</resultMap>
+	
+	<resultMap id="onTheSeaPdMap" type="insuranceRegistration.onTheSeaInsuranceRegistration">
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+		<result property="date" column="date" />
+		<result property="totalPrice" column="totalPrice" />
+	</resultMap>
+	
+	<resultMap id="specialPdMap" type="insuranceRegistration.specialInsuranceRegistration">
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+		<result property="date" column="date" />
+		<result property="totalPrice" column="totalPrice" />
+	</resultMap>
+
+	<insert id="fireInsert" parameterType="insuranceRegistration.fireInsuranceRegistration" useGeneratedKeys="true" keyProperty="date">
+		insert into fireInsuranceRegistration(date, totalPrice) values(#{date}, #{totalPrice});    
+	</insert>
+	<insert id="carInsert" parameterType="insuranceRegistration.carInsuranceRegistration" useGeneratedKeys="true" keyProperty="date">
+		insert into carInsuranceRegistration(date, totalPrice) values(#{date}, #{totalPrice});    
+	</insert>
+	<insert id="onTheSeaInsert" parameterType="insuranceRegistration.onTheSeaInsuranceRegistration" useGeneratedKeys="true" keyProperty="date">
+		insert into onTheSeaInsuranceRegistration(date, totalPrice) values(#{date}, #{totalPrice});    
+	</insert>
+	<insert id="specialInsert" parameterType="insuranceRegistration.specialInsuranceRegistration" useGeneratedKeys="true" keyProperty="date">
+		insert into specialInsuranceRegistration(date, totalPrice) values(#{date}, #{totalPrice});    
+	</insert>
+
+</mapper>

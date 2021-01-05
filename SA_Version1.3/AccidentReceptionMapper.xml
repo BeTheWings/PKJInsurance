@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AccidentReceptionMapper">
+	<resultMap id="AccidentReceptionMap" type="client.clientVO">
+		<result property="clientName" column="clientName" />
+		<result property="residentRegistrationNumber" column="registrationNumber" />
+		<result property="gender" column="gender" />
+		<result property="phoneNumber" column="phoneNumber" />
+		<result property="email" column="email" />
+		<result property="accidentContent" column="accidentContent" />
+		<result property="accidentID" column="accidentId" />
+	</resultMap>
+
+	<select id="searchInformation" parameterType="client.clientVO" resultMap="AccidentReceptionMap">
+       SELECT * from accidentReception;
+    </select>
+
+	<insert id="insertInformation" parameterType="client.clientVO" useGeneratedKeys="true" keyProperty="accidentId">
+INSERT INTO accidentReception(clientName,registrationNumber,gender,phoneNumber,email,accidentContent)
+values(#{clientName},#{residentRegistrationNumber},#{gender},#{phoneNumber},#{email},#{accidentContent});
+</insert>
+
+	<delete id="deleteInformation" parameterType="client.clientVO">
+
+delete from accidentReception where clientName =#{clientName};
+</delete>
+</mapper>

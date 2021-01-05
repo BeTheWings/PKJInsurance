@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="specialInsuranceMapper">
+
+   <!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다. -->
+   <resultMap id="specialInsuranceMap" type="model_insurance.mSpecialInsurance">
+      <!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+      <result property="insuranceName" column="insuranceName" />
+      <result property="subscriptionTarget" column="subscriptionTarget" />
+      <result property="insurancePeriod" column="insurancePeriod" />
+      <result property="insuranceMoney" column="insuranceMoney" />
+      <result property="payIn" column="payIn" />
+      <result property="specialSubscription" column="specialSubscription" />
+
+   </resultMap>
+
+   <resultMap id="onTheSeaInsuranceDesignMap" type="model_insurnaceDesinging.mInsuranceDesinging">
+      <!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+      <result property="insuranceID" column="insuranceID" />
+      <result property="insuranceName" column="insuranceName" />
+      <result property="subscriptionTarget" column="subscriptionTarget" />
+      <result property="payment" column="payIn" />
+      <result property="insurancePeriod" column="insurancePeriod" />
+      <result property="paymentMethod" column="paymentMethod" />
+      <result property="insuranceMoney" column="insuranceMoney" />
+      <result property="notes" column="note" />
+      <result property="specialSubscription" column="specialSubscription" />
+      <result property="insuranceCategory" column="insuranceCategory" />
+   </resultMap>
+   <!-- 단일행 조회를 위한 기능 정의 -->
+   <!--보험가입 양식-->
+   <select id="insertInfo" parameterType="model_insurance.mSpecialInsurance" resultMap="specialInsuranceMap">
+        SELECT * FROM insurance where insuranceName = #{insuranceName};
+    </select>
+
+   <insert id="specialInsert" parameterType="model_insurnaceDesinging.mInsuranceDesinging" useGeneratedKeys="true" keyProperty="insuranceID">
+      insert into insurance(insuranceName, subscriptionTarget, payIn, insurancePeriod, paymentMethod, insuranceMoney,specialSubscription,note,insuranceCategory)
+       values(#{insuranceName},#{subscriptionTarget},#{payment},#{insurancePeriod},#{paymentMethod},#{insuranceMoney}, #{specialSubscription},#{notes},#{insuranceCategory});
+    </insert>
+
+   <insert id="specialInsertClient" parameterType="model_insuranceRegistration.mSpecialInsuranceRegistration">
+       insert into specialInsuranceRegistrationInfo(
+       insuranceName,name, residentRegistrationNumber, age, gender, phoneNumber, address,accountNumber, email, job, accidentHistory, longterm, 
+       RegistrationDate, specialInsuranceType, specialProperty, insuranceMoney
+       ) values(
+       #{insuranceName},#{name},#{residentRegistrationNumber},#{age},#{gender},#{phoneNumber},#{address}, #{accountNumber}, #{email}, #{job}, 
+       #{accidentHistory}, #{longterm}, #{date}, #{specialType}, #{property}, #{totalPrice});
+    </insert>
+
+</mapper>

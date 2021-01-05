@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AccidentReceptionMapper">
+	<resultMap id="AccidentReceptionMap" type="model_accidentReception.mAccidentReceptionApplication">
+		<result property="name" column="clientName" />
+		<result property="idNumber" column="registrationNumber" />
+		<result property="gender" column="gender" />
+		<result property="phoneNumber" column="phoneNumber" />
+		<result property="eMail" column="email" />
+		<result property="accidentContent" column="accidentContent" />
+		<result property="accidentID" column="accidentId" />
+		<result property="insuranceCategory" column="insuranceCategory" />
+		<result property="insuranceName" column="insuranceName" />
+
+	</resultMap>
+
+	<resultMap id="checkMap" type="model_client.mClient">
+		<result property="insuranceName" column="insuranceName" />
+	</resultMap>
+
+	<select id="checkInsuranceName" parameterType="model_accidentReception.mAccidentReceptionApplication" resultMap="checkMap">
+		select insuranceName from insurance where insuranceName = #{insuranceName};		
+	</select>
+
+	<select id="searchInformation" parameterType="model_accidentReception.mAccidentReceptionApplication" resultMap="AccidentReceptionMap">
+		select clientName, accidentReception.insuranceName, insuranceCategory, phoneNumber, accidentContent from accidentReception, insurance
+		where accidentReception.insuranceName = insurance.insuranceName;
+	</select>
+
+	<insert id="insertInformation" parameterType="model_accidentReception.mAccidentReceptionApplication" useGeneratedKeys="true" keyProperty="accidentId">
+		INSERT INTO accidentReception(clientName,registrationNumber,gender,phoneNumber,email,accidentContent,insuranceName)
+		values(#{name},#{idNumber},#{gender},#{phoneNumber},#{eMail},#{accidentContent},#{insuranceName});
+	</insert>
+
+	<delete id="deleteInformation" parameterType="model_accidentReception.mAccidentReceptionApplication">
+		delete from accidentReception where clientName = #{name};
+</delete>
+</mapper>

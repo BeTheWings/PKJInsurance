@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="InsuranceMapper">
+
+	<resultMap id="InsuranceMap" type="model_insurance.mInsurance">
+		<result property="insuranceID" column="insuranceID" />
+		<result property="name" column="insuranceName" />
+		<result property="subscriptionTarget"
+			column="subscriptionTarget" />
+		<result property="insurancePeriod" column="insurancePeriod" />
+		<result property="paymentMethod" column="paymentMethod" />
+		<result property="payment" column="payIn" />
+		<result property="insuranceMoney" column="insuranceMoney" />
+		<result property="specialSubscription"
+			column="specialSubscription" />
+		<result property="statement" column="statement" />
+		<result property="insuranceCategory" column="insuranceCategory"/>
+
+	</resultMap>
+
+	<resultMap id="RateMap" type="model_client.mRate">
+		<result property="rate" column="rate" />
+		<result property="job" column="job" />
+	</resultMap>
+
+	<insert id="rateInsert" parameterType="model_client.mRate">
+		insert into rate(job, rate) values(#{job},#{rate});
+	</insert>
+	
+	<select id="findInsuranceStatement" parameterType="model_insurance.mInsurance" resultMap="InsuranceMap">
+		SELECT * from insurance where statement = 1;
+	</select>
+	<select id="searchCategory" parameterType="model_insurance.mInsurance" resultMap="InsuranceMap">
+    	select insuranceCategory from insurance where insuranceName = #{insuranceName};
+    </select>
+
+</mapper>

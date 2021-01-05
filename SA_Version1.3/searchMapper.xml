@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="searchMapper">
+	<resultMap id="searchMap" type="insurance.insurance">
+		<result property="name" column="insuranceName" />
+		<result property="insuranceMoney" column="insuranceMoney" />
+		<result property="payIn" column="payIn" />
+		<result property="insurancePeriod" column="insurancePeriod" />
+		<result property="insuranceID" column="InsuranceID" />
+		<result property="insuranceCategory" column="insuranceCategory" />
+
+	</resultMap>
+
+	<select id = "searchByAmount" parameterType="insurance.insurance" resultMap="searchMap">
+		select * from insurance where payIn = #{payIn};
+	</select>
+	
+	<select id = "searchByName" parameterType="insurance.insurance" resultMap="searchMap">
+		select * from insurance where insuranceCategory = #{insuranceCategory};
+	</select>
+	
+	<select id = "searchByPeriod" parameterType="insurance.insurance" resultMap="searchMap">
+		select * from insurance where insurancePeriod = #{insurancePeriod};
+	</select>
+
+</mapper>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="onTheSeaInsuranceMapper">
+
+	<!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다. -->
+	<resultMap id="onTheSeaInsuranceMap" type="insurance.onTheSeaInsurance">
+		<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+		<result property="insuranceName" column="insuranceName" />
+		<result property="subscriptionTarget" column="subscriptionTarget" />
+		<result property="insurancePeriod" column="insurancePeriod" />
+		<result property="insuranceMoney" column="insuranceMoney" />
+		<result property="payIn" column="payIn" />
+		<result property="specialSubscription" column="specialSubscription" />
+		<result property="email" column="email" />
+		<result property="accidentHistory" column="accidentHistory" />
+		<result property="job" column="job" />
+		<result property="longterm" column="longterm" />
+
+	</resultMap>
+
+	<!-- 단일행 조회를 위한 기능 정의 -->
+	<select id="InsertInfo" parameterType="insuranceRegistration.onTheSeaInsuranceRegistration" resultMap="onTheSeaInsuranceMap">
+		SELECT * FROM insurance where insuranceName =
+		#{insuranceName};
+	</select>
+
+	<insert id="onTheSeaInsert" parameterType="insurance.onTheSeaInsurance" useGeneratedKeys="true" keyProperty="insuranceID">
+		insert into insurance(insuranceName,
+		subscriptionTarget, payIn,
+		insurancePeriod, paymentMethod,
+		insuranceMoney,specialSubscription)
+		values(#{insuranceName},#{subscriptionTarget},#{payIn},#{insurancePeriod},#{paymentMethod},#{insuranceMoney},
+		#{specialSubscription});
+	</insert>
+
+	<insert id="onTheSeaInsertClient" parameterType="insuranceRegistration.onTheSeaInsuranceRegistration">
+		insert into onTheSeaInsuranceRegistrationInfo(
+		insuranceName,name,
+		residentRegistrationNumber, age, gender, phoneNumber,
+		address,accountNumber, email, job, accidentHistory, longterm
+		) values(
+		#{insuranceName},#{name},#{residentRegistrationNumber},#{age},#{gender},#{phoneNumber},#{address},
+		#{accountNumber}, #{email}, #{job}, #{accidentHistory}, #{longterm});
+	</insert>
+
+</mapper>

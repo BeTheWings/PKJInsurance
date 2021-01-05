@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="InsuranceToolClientMapper">
+	<resultMap id="InsuranceClientMap" type="client.client">
+		<result property="insuranceID" column="insuranceID" />
+		<result property="insuranceName" column="insuranceName" />
+		<result property="clientName" column="name" />
+		<result property="age" column="age" />
+		<result property="email" column="email" />
+		<result property="accidentContent" column="accidentHistory" />
+
+
+	</resultMap>
+
+	<select id="inquiryClientWaitList" parameterType="client.client"
+		resultMap="InsuranceClientMap">
+		select insuranceName, name, age, email, accidentHistory from
+		fireInsuranceRegistrationInfo where statement = #{searchMethod} union
+		all
+		select insuranceName, name, age, email, accidentHistory from
+		onTheSeaInsuranceRegistrationInfo where statement = #{searchMethod}
+		union all
+		select insuranceName, name, age, email, accidentHistory from
+		carInsuranceRegistrationInfo where statement = #{searchMethod} union
+		all
+		select insuranceName, name, age, email, accidentHistory from
+		specialInsuranceRegistrationInfo where statement = #{searchMethod};
+
+	</select>
+
+	<update id="updateFireClientInfo">
+		update fireInsuranceRegistrationInfo SET statement = 1 where name =
+		#{clientName};
+	</update>
+
+	<update id="updateOnTheSeaClientInfo">
+		update onTheSeaInsuranceRegistrationInfo SET statement = 1 where name =
+		#{clientName};
+	</update>
+
+	<update id="updateSpecialClientInfo">
+		update specialInsuranceRegistrationInfo SET statement = 1 where name =
+		#{clientName};
+	</update>
+
+	<update id="updateCarClientInfo">
+		update carInsuranceRegistrationInfo SET statement = 1 where name =
+		#{clientName};
+	</update>
+
+	<delete id="deleteFireClientInfo">
+		delete from fireInsuranceRegistrationInfo where name = #{clientName} and statement = 0;
+	</delete>
+
+	<delete id="deleteOnTheSeaClientInfo">
+		delete from onTheSeaInsuranceRegistrationInfo where name = #{clientName}and statement = 0;
+	</delete>
+
+	<delete id="deleteSpecialClientInfo">
+		delete from specialInsuranceRegistrationInfo where name = #{clientName}and statement = 0;
+	</delete>
+
+	<delete id="deleteCarClientInfo">
+		delete from carInsuranceRegistrationInfo where name = #{clientName}and statement = 0;
+	</delete>
+
+</mapper>

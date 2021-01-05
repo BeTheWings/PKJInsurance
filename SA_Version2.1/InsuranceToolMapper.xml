@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="InsuranceToolMapper">
+	<resultMap id="InsuranceMap" type="insurance.insuranceVO">
+		<result property="insuranceID" column="insuranceID" />
+		<result property="name" column="insuranceName" />
+		<result property="subscriptionTarget" column="subscriptionTarget" />
+		<result property="insurancePeriod" column="insurancePeriod" />
+		<result property="paymentMethod" column="paymentMethod" />
+		<result property="payment" column="payIn" />
+		<result property="insuranceMoney" column="insuranceMoney" />
+		<result property="specialSubscription" column="specialSubscription" />
+		<result property="statement" column="statement" />
+	</resultMap>
+
+	<resultMap id="insertMap" type="employee.employeeVO">
+		<result property="job" column="job" />
+		<result property="rate" column="rate" />
+	</resultMap>
+
+	<insert id="rateInsert" parameterType="employee.employeeVO" useGeneratedKeys="true">
+      insert into rate(job, rate values(#{job},#{rate}));
+   </insert>
+
+
+	<select id="inquiryForInsuranceWaitList" parameterType="insurance.insuranceVO" resultMap="InsuranceMap">
+      SELECT * from insurance where statement = #{statement};
+   </select>
+
+	<select id="inquiryClientWaitList" parameterType="insurance.insuranceVO" resultMap="InsuranceMap">
+      select insuranceName, name, age, email, accidentHistory from
+      fireInsuranceRegistrationInfo where statement = #{searchMethod} union
+      all
+      + select insuranceName, name, age, email, accidentHistory from
+      onTheSeaInsuranceRegistrationInfo where statement = #{searchMethod}
+      union all
+      + select insuranceName, name, age, email, accidentHistory from
+      carInsuranceRegistrationInfo where statement = #{searchMethod} union
+      all
+      + select insuranceName, name, age, email, accidentHistory from
+      specialInsuranceRegistrationInfo where statement = #{searchMethod};
+   </select>
+
+	<delete id="insuranceApprove_Delete" parameterType="insurance.insuranceVO">
+      delete from insurance where insuranceName = #{information} + and statement = 0;
+   </delete>
+
+	<update id="insuranceApprove_Update" parameterType="insurance.insuranceVO">
+      update insurance SET statement = 1 where insuranceName = #{information};
+   </update>
+
+</mapper>

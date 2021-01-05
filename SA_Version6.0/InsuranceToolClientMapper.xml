@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="InsuranceToolClientMapper">
+	<resultMap id="InsuranceClientMap" type="model_client.mClient">
+		<result property="insuranceID" column="insuranceID" />
+		<result property="insuranceName" column="insuranceName" />
+		<result property="clientName" column="name" />
+		<result property="age" column="age" />
+		<result property="email" column="email" />
+		<result property="accidentContent" column="accidentHistory" />
+		<result property="residentRegistrationNumber" column="residentRegistrationNumber" />
+		<result property="insuranceCategory" column="insuranceCategory" />
+
+	</resultMap>
+<!-- 카테고리가 fireInsuranceRegistrationInfo 여기에 없어서 지웠음 -->
+	<select id="inquiryClientWaitList" parameterType="model_client.mClient" resultMap="InsuranceClientMap">
+		select insuranceCategory,insuranceName, name,age, phoneNumber, accidentHistory from
+		fireInsuranceRegistrationInfo where statement = #{searchMethod} union
+		all
+		select insuranceCategory,insuranceName, name,age, phoneNumber, accidentHistory from
+		onTheSeaInsuranceRegistrationInfo where statement = #{searchMethod}
+		union all
+		select insuranceCategory,insuranceName, name,age, phoneNumber, accidentHistory from
+		carInsuranceRegistrationInfo where statement = #{searchMethod} union
+		all
+		select insuranceCategory,insuranceName, name,age, phoneNumber, accidentHistory from
+		specialInsuranceRegistrationInfo where statement = #{searchMethod};
+	</select>
+
+
+	<select id="searchForClientInfor" parameterType="model_client.mClient" resultMap="InsuranceClientMap">
+		select insuranceCategory, insuranceName, name, residentRegistrationNumber, gender from carInsuranceRegistrationInfo where name = #{clientName} 
+		and residentRegistrationNumber = #{residentRegistrationNumber} and statement = 1 union all
+		select insuranceCategory, insuranceName, name, residentRegistrationNumber, gender from fireInsuranceRegistrationInfo where name = #{clientName} 
+		and residentRegistrationNumber = #{residentRegistrationNumber} and statement = 1 union all
+		select insuranceCategory, insuranceName, name, residentRegistrationNumber, gender from onTheSeaInsuranceRegistrationInfo where name = #{clientName} 
+		and residentRegistrationNumber = #{residentRegistrationNumber} and statement = 1 union all
+		select insuranceCategory, insuranceName, name, residentRegistrationNumber, gender from specialInsuranceRegistrationInfo where name = #{clientName} 
+		and residentRegistrationNumber= #{residentRegistrationNumber} and statement = 1;
+	</select>
+
+	<update id="updateFireClientInfo">
+		update fireInsuranceRegistrationInfo SET statement = 1 where name =#{clientName};
+	</update>
+
+	<update id="updateOnTheSeaClientInfo">
+		update onTheSeaInsuranceRegistrationInfo SET statement = 1 where name =#{clientName};
+	</update>
+
+	<update id="updateSpecialClientInfo">
+		update specialInsuranceRegistrationInfo SET statement = 1 where name =#{clientName};
+	</update>
+
+	<update id="updateCarClientInfo">
+		update carInsuranceRegistrationInfo SET statement = 1 where name =#{clientName};
+	</update>
+
+	<!-- 	삭제		 -->
+	<delete id="deleteFireClientInfo">
+		delete from fireInsuranceRegistrationInfo where name = #{clientName} and statement = 1;
+	</delete>
+
+	<delete id="deleteOnTheSeaClientInfo">
+		delete from onTheSeaInsuranceRegistrationInfo where name = #{clientName}and statement = 1;
+	</delete>
+
+	<delete id="deleteSpecialClientInfo">
+		delete from specialInsuranceRegistrationInfo where name = #{clientName}and statement = 1;
+	</delete>
+
+	<delete id="deleteCarClientInfo">
+		delete from carInsuranceRegistrationInfo where name = #{clientName}and statement = 1;
+	</delete>
+
+</mapper>
