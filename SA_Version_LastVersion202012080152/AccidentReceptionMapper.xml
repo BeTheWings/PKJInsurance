@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AccidentReceptionMapper">
+	<resultMap id="AccidentReceptionMap" type="model_client.mClient">
+		<result property="clientName" column="clientName" />
+		<result property="residentRegistrationNumber" column="registrationNumber" />
+		<result property="gender" column="gender" />
+		<result property="phoneNumber" column="phoneNumber" />
+		<result property="email" column="email" />
+		<result property="accidentContent" column="accidentContent" />
+		<result property="accidentID" column="accidentId" />
+		<result property="insuranceCategory" column="insuranceCategory" />
+		<result property="statement" column="statement" />
+		<result property="employeeID" column="employeeID" />
+
+	</resultMap>
+
+	<resultMap id="checkMap" type="model_client.mClient">
+		<result property="insuranceName" column="insuranceName" />
+	</resultMap>
+
+	<select id="checkInsuranceName" parameterType="model_client.mClient" resultMap="checkMap">
+		select insuranceName from insurance where insuranceName = #{insuranceName};		
+	</select>
+
+	<select id="searchInformation" parameterType="model_client.mClient" resultMap="AccidentReceptionMap">
+		select clientName, accidentReception.insuranceName, insuranceCategory, phoneNumber, accidentContent from accidentReception, insurance
+		where accidentReception.insuranceName = insurance.insuranceName and accidentReception.statement=#{statement};
+	</select>
+
+	<insert id="insertInformation" parameterType="model_client.mClient" useGeneratedKeys="true" keyProperty="accidentId">
+		INSERT INTO accidentReception(employeeID,clientName,registrationNumber,gender,phoneNumber,email,accidentContent,insuranceName)
+		values(#{employeeID},#{clientName},#{residentRegistrationNumber},#{gender},#{phoneNumber},#{email},#{accidentContent},#{insuranceName});
+	</insert>
+
+	<delete id="deleteInformation" parameterType="model_client.mClient">
+		delete from accidentReception where clientName = #{clientName};
+</delete>
+	<update id="updateInformation" parameterType="model_client.mClient">
+	update accidentReception set statement=1 where clientName=#{clientName} and statement = 0;</update>
+
+	<update id="updateFireClientInfo" parameterType="model_accidentReception.mAccidentApproval">
+	update fireInsuranceRegistrationInfo set accidentHistory="사고있음" where name=#{clientName} and insuranceName = #{insuranceName};</update>
+
+	<update id="updateSeaClientInfo" parameterType="model_accidentReception.mAccidentApproval">
+	update onTheSeaInsuranceRegistrationInfo set accidentHistory="사고있음" where name=#{clientName} and insuranceName = #{insuranceName};</update>
+
+	<update id="updateCarClientInfo" parameterType="model_accidentReception.mAccidentApproval">
+	update carInsuranceRegistrationInfo set accidentHistory="사고있음" where name=#{clientName} and insuranceName = #{insuranceName};</update>
+
+	<update id="updateSpecialClientInfo" parameterType="model_accidentReception.mAccidentApproval">
+	update specialInsuranceRegistrationInfo set accidentHistory="사고있음" where name=#{clientName} and insuranceName = #{insuranceName};;</update>
+
+</mapper>
